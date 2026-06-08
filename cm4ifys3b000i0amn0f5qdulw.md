@@ -17,6 +17,8 @@ It’s what drives ChatgGPT. No, really. That’s what an LLM is. From Chatgpt t
 For a clear first impression, watching [This video](https://www.youtube.com/watch?v=zjkBMFhNj_g%5D\(https://www.youtube.com/watch?v=zjkBMFhNj_g\)) is essential; barely anyone else can explain LLMs like Andrej.  
 Consider this post as simultaneously a TLDR of the video and a somewhat deeper dive into the topics through supplementary articles.
 
+And if you're curious about Neural networks in general, you should check out another post of mine, [here](https://sukalyanroy.hashnode.dev/understanding-neural-networks)
+
 To summarize the idea, LLMs or Large Language Models are the product of a new way of thinking about text processing.
 
 It works on the fairly new attention-based transformer architecture to encode all its training data into a set of internal representations. Given how the training data is a several terabyte scrape of the internet, one could, as Andrej explains it, think of it like a semantic, lossy compression of the internet itself.
@@ -79,11 +81,11 @@ Disclaimer: There are many many more that I discovered from reading research pap
 
 Some of those include things like
 
-1. Jailbreaks: essentially roleplaying with the LLM in a way to convince it that it has no restrictions.
+1.  Jailbreaks: essentially roleplaying with the LLM in a way to convince it that it has no restrictions.
     
-2. Asking your "forbidden" question in languages other than english, because even though the models are trained on many different languages, most of the security measures are implemented in english.
+2.  Asking your "forbidden" question in languages other than english, because even though the models are trained on many different languages, most of the security measures are implemented in english.
     
-3. Prompt injection attacks: Used by websites to gain control over models that actively query data from sites. Usually these are instructions for the model, written in white text inside the web pages so that it is invisible to the users, but often these are effective enough that it can change the behaviour of the responses.
+3.  Prompt injection attacks: Used by websites to gain control over models that actively query data from sites. Usually these are instructions for the model, written in white text inside the web pages so that it is invisible to the users, but often these are effective enough that it can change the behaviour of the responses.
     
 
 ### Recent Developments
