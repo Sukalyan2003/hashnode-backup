@@ -8,7 +8,7 @@ tags: cli, ai-development, promptengineering, claude, rag, claude-code
 
 ---
 
-In the last post about RAGs we went through some basic ways of finding similarities in texts, but it's quite obvious that it's a far cry from all the sophisticated ways in which AI works right now.
+In the [last post about RAGs](https://sukalyanroy.hashnode.dev/discovering-rags-a-comprehensive-guide-part-1) we went through some basic ways of finding similarities in texts, but it's quite obvious that it's a far cry from all the sophisticated ways in which AI works right now.
 
 So... what's the difference?
 
@@ -37,12 +37,10 @@ And depending upon the permissions you give them, they can do significantly more
 
 ## The Prompts
 
-  
-Apart from the per session chats themselves, there is a hierarchy of prompts in every CLI Agentic AI tool.  
-  
+Apart from the per session chats themselves, there is a hierarchy of prompts in every CLI Agentic AI tool.
+
 First you have the Global Prompt, then the project specific prompt, and then the use case wise specific skills that you add or remove.
 
-  
 An important thing to remember is that most different "modes" and skills everywhere is just another Prompt that repeatably achieves similar tasks.
 
 The lowest hanging fruit in getting good results from AI is to understand this prompt hierarchy and have these setup as early as possible.
@@ -59,7 +57,6 @@ This is also an important observation that, the closer AI gets to reasoning and 
 
 ![](https://cdn.hashnode.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/5ddceb5f-931d-44bc-8fc0-0352528af501.png align="center")
 
-  
 There is a feature in Claude (at the time of writing i didnt see it elsewhere) where you can manually create and run multiple agents, each with it's own specific agenda and task.
 
 Overall in my exploration, I have felt like this is only useful if you have near unlimited token budget and can spam workflows a lot.
@@ -112,29 +109,34 @@ One thing to note is that, a lot of the ideas that we'll go through will be part
 
 But just as learning low level stuff helps us build things better in our day to day lives, here as well, learning about some of these legacy ways of doing things will help us understand how the new features might be working in the upcoming updates of the models themselves.
 
-1.  Few shot prompting.  
-      
+1.  Few shot prompting.
+    
     When we ask the AI to do something for us with no examples, that's 0-shot prompting. When we give one example that's 1-shot prompting and more than one examples is Few shot prompting. The more examples we give, the more "consistent" the outputs become.
     
-2.  Chain of thought Prompting  
-      
+2.  Chain of thought Prompting
+    
     This relatively recent alternative to Few shot prompting is done as follows:  
     You pose a question and give it's answer, but this time you explain the answer with reasoning just like a human. Then you ask your another question of the same type and let the AI come up with an answer. This method has been observed to be successful only when the model is larger than 100 billion parameters.
     
-3.  Zero shot Chain of thought  
-      
+3.  Zero shot Chain of thought
+    
     When coming up with few shot explanations for A given question is difficult, we can add the following to the end of prompt, to get a better but still not as good as CoT response: "Let's think step by step"
     
 4.  Make the AI come up with reasoning.  
     When you are short on explanations but want a proper CoT prompt, tell the AI to list facts for you, and then use them as the explanations for your CoT.
     
+5.  Write "Show me only the code" for simple prompts so that the verbosity of it's explanations doesn't slow the responses.
+    
+6.  Make it write test cases for everything.
+    
+7.  Unit tests can also serve as examples. Before writing your function, you can use Copilot to write unit tests for the function. Then, you can ask Copilot to write a function described by those unit tests.
+    
 
-1.  Write "Show me only the code" for simple prompts so that the verbosity of it's explanations doesn't slow the responses.
-    
-2.  Make it write test cases for everything.
-    
-3.  Unit tests can also serve as examples. Before writing your function, you can use Copilot to write unit tests for the function. Then, you can ask Copilot to write a function described by those unit tests.
-    
+## Conclusion
+
+This was my attempt to codify some of the best practices, but even for me it's a continuous learning process.
+
+Check out the next post in this series: [here](https://sukalyanroy.hashnode.dev/discovering-rags-2-what-is-agentic-rag)
 
 # References
 
