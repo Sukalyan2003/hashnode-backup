@@ -325,4 +325,6 @@ And it has been quite a long time since i have touched on this topic; Rewriting 
 
 If you want to learn more about LLMs, check out this post [here](https://sukalyanroy.hashnode.dev/what-even-are-llms)
 
-See you soon in the next post.
+And you can check the next post in this series: [here](https://sukalyanroy.hashnode.dev/ai-prompt-engineering-basics)
+
+See you there!
