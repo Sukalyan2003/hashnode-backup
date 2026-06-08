@@ -11,7 +11,7 @@ tags: ai, agents, rag, retrieval-augmented-generation, agentic-ai, agentic-rag
 
 ## Where we are now
 
-In the previous post, we went over the basic ideas of a RAG, and some ways to optimize our prompting so that we can use existing solutions.
+In the [previous posts](https://sukalyanroy.hashnode.dev/ai-prompt-engineering-basics), we went over the basic ideas of a RAG, and some ways to optimize our prompting so that we can use existing solutions.
 
 The next step is to try and recreate such tools ourselves.
 
