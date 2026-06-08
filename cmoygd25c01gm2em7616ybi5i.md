@@ -16,6 +16,8 @@ Here I will outline the ideas behind this as I understand them, and build my own
 
 So first of all, in this part, we will deal with, what is a RAG all about? The history and theory behind it, in as non technical terms as I can.
 
+(And if you need further background on LLMs, check out this post [here](https://sukalyanroy.hashnode.dev/what-even-are-llms))
+
 ## What is a RAG?
 
 Suppose you want to develop a chatbot or assistant, that deals with proprietary or highly specific data that is new, and certainly not within the web crawled general data the model has been trained on.
@@ -319,6 +321,8 @@ So that was my (perhaps) last naive implementation of a RAG. At this point, the 
 
 Later on, once the metadata is put into an embedding, it will become much faster to let vector logic do it’s work, and let the LLM do what it’s actually meant to do, process the text and generate insights.
 
-And it has been quite a long time since i have touched on this topic; Rewriting the post made me think about what i could potentially do next, stay tuned for that.  
-  
+And it has been quite a long time since i have touched on this topic; Rewriting the post made me think about what i could potentially do next, stay tuned for that.
+
+If you want to learn more about LLMs, check out this post [here](https://sukalyanroy.hashnode.dev/what-even-are-llms)
+
 See you soon in the next post.
