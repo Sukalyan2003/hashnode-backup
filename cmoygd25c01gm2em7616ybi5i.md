@@ -1,8 +1,8 @@
 ---
-title: "Discovering RAGs: A Comprehensive Guide - Part 1"
+title: "Transforming Chatbot Interactions with Retrieval Augmented Generation"
 datePublished: 2026-05-09T14:41:59.331Z
 cuid: cmoygd25c01gm2em7616ybi5i
-slug: discovering-rags-a-comprehensive-guide-part-1
+slug: transforming-chatbot-interactions-with-retrieval-augmented-generation
 cover: https://cloudmate-test.s3.us-east-1.amazonaws.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/fa2d15e1-ed82-4806-a585-518539617be1.webp
 tags: rag
 
