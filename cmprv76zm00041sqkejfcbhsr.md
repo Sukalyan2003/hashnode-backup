@@ -1,9 +1,9 @@
 ---
-title: "Discovering RAGs 2: What is Agentic RAG? 
+title: "What is Agentic RAG? 
 "
 datePublished: 2026-05-30T04:42:39.018Z
 cuid: cmprv76zm00041sqkejfcbhsr
-slug: discovering-rags-2-what-is-agentic-rag
+slug: what-is-agentic-rag
 cover: https://cdn.hashnode.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/3d5739c8-8228-47fc-98af-94c6a47d8a96.png
 tags: ai, agents, rag, retrieval-augmented-generation, agentic-ai, agentic-rag
 
