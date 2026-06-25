@@ -1,8 +1,8 @@
 ---
-title: "Discovering RAGs 3: More on Agentic Rags and Project updates"
+title: "Adding Rank Fusion to my RAG retrieval logic"
 datePublished: 2026-06-20T06:02:42.197Z
 cuid: cmqlyb15100010bj9aj83ecp8
-slug: discovering-rags-3-more-on-agentic-rags-and-project-updates
+slug: adding-rank-fusion-to-my-rag-retrieval-logic
 cover: https://cdn.hashnode.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/2a9c9773-800e-4387-a2e0-4a8d463a05c4.png
 tags: rag, agentic-ai
 
