@@ -1,5 +1,5 @@
 ---
-title: "Agentic AI and Effective Prompting"
+title: "How I Use AI Coding Agents Without Burning Tokens or Trusting Them Blindly"
 datePublished: 2026-05-16T14:56:02.378Z
 cuid: cmp8gy3b7000n1shx9w2uep9d
 slug: ai-prompt-engineering-basics
