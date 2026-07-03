@@ -13,6 +13,17 @@ Now it’s time to change that.
 
 In this post we will cover topics all the way from Optimization to Supervised, unsupervised learning, and Reinforcement learning for playing games, to Computer vision in the domain of traffic management, and end it with discussions of language and Attention mechanisms.
 
+## TL;DR
+
+*   This is the continuation of my CS50 AI notes after finishing CS50x.
+    
+*   The course moves from broad AI ideas into more concrete search, logic, probability, learning, and language problems.
+    
+*   The main value is not just the algorithms, but learning how to model a problem precisely.
+    
+*   Some topics feel mathematical at first, but the projects make them easier to understand.
+    
+
 # Week 3
 
 This week is all about optimization algorithms, and the way they are relevant in search based AI.
