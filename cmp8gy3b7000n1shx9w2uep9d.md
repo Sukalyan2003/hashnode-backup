@@ -4,9 +4,26 @@ datePublished: 2026-05-16T14:56:02.378Z
 cuid: cmp8gy3b7000n1shx9w2uep9d
 slug: ai-prompt-engineering-basics
 cover: https://cdn.hashnode.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/70861de8-2d7c-47dd-9d82-d4e73642ef69.webp
-tags: cli, ai-development, promptengineering, claude, rag, claude-code
+tags: cli, developer-tools, ai-development, promptengineering, claude, rag, claude-code
 
 ---
+
+## TL;DR
+
+*   I use coding agents as accelerators, not as authorities.
+    
+*   The smaller the task and clearer the context, the better the result.
+    
+*   I avoid dumping an entire repo into the prompt unless the task actually needs it.
+    
+*   I verify outputs with tests, diffs, type checks, and my own reading.
+    
+*   The best workflow is constrained delegation.
+    
+
+> **Workflow status**
+> 
+> This is my current personal workflow for using AI coding agents. It will change as the tools improve, but the core habit will stay the same: give them bounded work and verify the result.
 
 In the [last post about RAGs](https://sukalyanroy.hashnode.dev/discovering-rags-a-comprehensive-guide-part-1) we went through some basic ways of finding similarities in texts, but it's quite obvious that it's a far cry from all the sophisticated ways in which AI works right now.
 
@@ -60,6 +77,13 @@ This is also an important observation that, the closer AI gets to reasoning and 
 There is a feature in Claude (at the time of writing i didnt see it elsewhere) where you can manually create and run multiple agents, each with it's own specific agenda and task.
 
 Overall in my exploration, I have felt like this is only useful if you have near unlimited token budget and can spam workflows a lot.
+
+| Task type | How I use the agent | How I verify it |
+| --- | --- | --- |
+| Small bug | Give the exact file, symptom, and expected behavior | Run the failing case and inspect the diff |
+| Refactor | Ask for the smallest behavior-preserving change | Run tests and check public interfaces |
+| New feature | Ask for a plan first, then implementation | Test happy path, edge cases, and integration points |
+| Explanation | Ask it to cite files/functions, not just summarize | Open the referenced code myself |
 
 Most of the Agentic AI workflows actually work under the assumption that prompt cost is not a factor, that lines of code is a useful metric and that as long as we can optimize for memory under long workflows, we can essentially prompt loop our way to success.
 
@@ -135,6 +159,8 @@ But just as learning low level stuff helps us build things better in our day to 
 ## Conclusion
 
 This was my attempt to codify some of the best practices, but even for me it's a continuous learning process.
+
+If you use coding agents differently, I am especially interested in the verification part. The prompt is less important than how you catch the model when it is confidently wrong.
 
 Check out the next post in this series: [here](https://sukalyanroy.hashnode.dev/discovering-rags-2-what-is-agentic-rag)
 
