@@ -4,7 +4,7 @@ datePublished: 2026-06-06T04:57:51.375Z
 cuid: cmq1vtpmy001m1spqbt3mcsx6
 slug: from-tokens-to-trees
 cover: https://cdn.hashnode.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/2d7b4fff-b790-4dc6-9982-87b02595d638.jpg
-tags: python, compiler, compilerdesign
+tags: python, interpreter, ast, compiler, parsing, compilerdesign
 
 ---
 
@@ -16,11 +16,26 @@ In this blog post, I'll walk you through the development process, sharing insigh
 
 By the end, we’ll have a small expression interpreter with variables, arithmetic, booleans, and a clearer mental model of how programming languages move from text to execution.
 
+## TL;DR
+
+*   This post builds a tiny interpreter to understand what happens between source code and execution.
+    
+*   The pipeline goes from raw text to tokens, then a syntax tree, then evaluation.
+    
+*   The implementation supports arithmetic, variables, booleans, and basic expression handling.
+    
+*   The goal is not to build a production language. It is to make compiler-design ideas less abstract.
+    
+
+> **Project status**
+> 
+> This interpreter is a learning project based on a tutorial, with my own modifications and explanations added while building. It currently covers the core interpreter pipeline. Better errors, functions, scopes, and a cleaner grammar would be natural next steps.
+
 * * *
 
-Note: While the foundational concepts are based on the tutorial, several implementations, modifications, and explanations are my own. I've included questions I had during development, along with detailed answers.
-
 ## Getting Started: The Big Picture
+
+![](https://cdn.hashnode.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/27450826-c814-4a9d-8209-6dc3d7e05edf.png align="center")
 
 Before diving into code, it's essential to have a clear mental model of what we're building. An interpreter typically consists of three main components:
 
@@ -64,7 +79,6 @@ def tokenize_number(self):
 
 #### Why do we need separate functions in the interpreter to convert each data type from string back into their original types?
 
-  
 Initially, I had separate functions like read\_INT, read\_FLOAT, and read\_VAR to convert string representations back into their original types. This was necessary because when tokens are created, their values are stored as strings. However, having multiple functions becomes cumbersome and can be refactored for efficiency.
 
 One potential improvement is to modify the token classes to store values in their appropriate types upon creation. This way, we can eliminate the need for separate conversion functions in the interpreter, simplifying the code.
@@ -149,7 +163,7 @@ def factor(self):
 
 * * *
 
-#### Why does a simple change like that in the factor method make brackets work?  
+#### Why does a simple change like that in the factor method make brackets work?
 
 By returning the expression when encountering an opening parenthesis, we're treating the entire parenthesized expression as a single factor. This means that in higher-level methods (`term` and expression), the parenthesized expression is considered one unit, maintaining the correct order of operations. If we didn't do this, the parser would treat parentheses as separate tokens, leading to incorrect evaluation.
 
@@ -207,7 +221,6 @@ def evaluate(self, left, op, right):
 
 #### Why does directly returning the output not work, and you have to return your predefined class object?
 
-  
 The interpreter's methods expect operands to be objects with specific attributes (like type and value). If we return primitive data types like integers or floats directly, these attributes are missing, leading to errors. By returning instances of our predefined token classes (e.g., Integer, Float), we maintain a consistent structure that the interpreter can work with, allowing it to handle different data types uniformly.
 
 ### Managing Variables and Assignments
@@ -312,7 +325,7 @@ def read_VAR(self, id):
 
 ### Understanding the Grammar Design
 
-#### Why was the grammar structured with separate levels for Expression, Term, and Factor?  
+#### Why was the grammar structured with separate levels for Expression, Term, and Factor?
 
 This structure enforces operator precedence, ensuring that multiplication and division are computed before addition and subtraction, and that expressions within parentheses are evaluated first. By handling each level separately, the parser can correctly interpret complex expressions and maintain the correct order of operations.
 
@@ -386,6 +399,8 @@ Building a simple interpreter from scratch was both challenging and rewarding. I
 The complete github repo will be posted alongside Part 2 of this post.
 
 I encourage anyone interested in language design or compilers to embark on a similar journey. Not only does it demystify the process, but it also opens up new possibilities for creating your own languages and tools.
+
+If you have only used programming languages from the outside, try building even a toy interpreter once.
 
 Also, if you have worked on a similar project, i'd appreciate any suggestions you might have for Part 2.
 
