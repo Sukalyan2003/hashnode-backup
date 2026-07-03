@@ -16,8 +16,22 @@ Have you ever wondered how your computer or phone makes so many different apps w
 
 These Background “Processes” are a very common way to achieve multitasking.
 
-  
 For this post, let’s begin by learning about certain terms in broader lingo, and then drill down on them to learn more about the internals of how your operating system and the programming languages on top of it, use these ideas to make everything seamless for us.
+
+## TL;DR
+
+*   Process synchronization is about stopping concurrent programs from corrupting shared state.
+    
+*   The core problem is the race condition: output depends on timing instead of logic.
+    
+*   Locks, semaphores, and other primitives are ways to control access to critical sections.
+    
+*   The hard part is balancing correctness with deadlocks, waiting, and performance.
+    
+
+> **Learning status**
+> 
+> This post is part operating-systems note, part Linux learning log. The goal is to connect textbook synchronization ideas with what actually happens when processes run together.
 
 ## What are processes?
 
@@ -40,7 +54,7 @@ Now comes the fun part, these processes themselves are not the smallest unit of 
 
 Each process can be further divided into one or more threads, with the fundamental difference being that, Each process has it’s separate collection of hardware and software resources, but all threads under a process share the same stuff.
 
-When we have different kinds of tasks, where they are IO Bound(Bottlenecked by slow IO) then we use Threads. When one IO bound thread is stuck at waiting, the CPu can process some other thread which has got the response it was waiting for.
+When we have different kinds of tasks, where they are IO Bound(Bottlenecked by slow IO) then we use Threads. When one IO bound thread is stuck at waiting, the CPU can process some other thread which has got the response it was waiting for.
 
 ![PPT - Processes, Threads, Synchronization PowerPoint Presentation, free ...](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.slideserve.com%2F1279819%2Fdiagram-of-thread-state-l.jpg&f=1&nofb=1&ipt=dac163cc3020fd4b6730151d0a363b27415fdd06edc71ef0883c48abbb27d746 align="left")
 
@@ -66,6 +80,13 @@ With that as the Parent, every other process is created as it’s child at first
 This creation of a process from another process is called Forking. We fork a parent to create a Child Process, where the child can act as the parent of some other processes and so on.
 
 Each process has it’s PID or it’s process ID, and it also has a PPID or the Parent Process ID. These two are enough for us to track them, in tools such has top or htop, which is the task manager tool for linux terminals
+
+| Concept | Meaning | Failure it prevents |
+| --- | --- | --- |
+| Critical section | Code that touches shared state | Two processes changing the same thing at once |
+| Mutex / lock | Allows one actor in at a time | Race conditions |
+| Semaphore | Controls access with a counter | Overuse of limited resources |
+| Deadlock | Everyone waits forever | Bad lock ordering or circular waiting |
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1766772162039/66003f15-0368-4470-bca5-166dad2b94bf.png align="center")
 
