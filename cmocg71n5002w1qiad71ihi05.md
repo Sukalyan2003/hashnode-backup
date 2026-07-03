@@ -18,6 +18,17 @@ The notes provided by Harvard themselves might be a lot better for studying, but
 
 Also, the problem statements here are huge, and much much harder than the CS50x problem statements, so this will be broken into two posts.
 
+## TL;DR
+
+*   CS50 AI is a natural next step after CS50x if you want to understand AI from first principles.
+    
+*   It is not just "use a model through an API." It starts with search, logic, uncertainty, optimization, and learning.
+    
+*   The projects are the point: they force you to turn ideas into working programs.
+    
+*   This post starts my notes on what the course covers and why I picked it.
+    
+
 # Week 0 - Search
 
 This was such a painful start, totally stumped for several days and not being able to understand what to do and how to begin. My first mistake was assuming that since i had studied these topics for my semester exams, that i knew how to apply them. Which is definitely not the case.Had to really go through the material from scratch and try to understand them before being able to complete this.
