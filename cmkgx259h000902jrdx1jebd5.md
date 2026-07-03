@@ -7,7 +7,7 @@ cuid: cmkgx259h000902jrdx1jebd5
 slug: nand2tetris-part-1-hardware
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1767964571211/15b8d01e-c959-406e-bd0b-0f6634309615.jpeg
 ogImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1767964561677/eaa11cf8-5868-4013-b454-925e12f2c1b1.jpeg
-tags: hardware, assembly, nand2tetris
+tags: hardware, assembly, computer-architecture, nand2tetris
 
 ---
 
@@ -15,7 +15,24 @@ After many many months and years of procrastinating, i finally started this book
 
 [https://github.com/Sukalyan2003/Nand2Tetris](https://github.com/Sukalyan2003/Nand2Tetris) ← Here is the repo
 
+## TL;DR
+
+*   Nand2Tetris starts with one primitive gate and slowly builds a computer upward.
+    
+*   The hardware part makes abstractions feel physical: gates become adders, adders become ALUs, and memory becomes state.
+    
+*   The biggest lesson is that computers are layered, not magical.
+    
+*   This post covers my first pass through the hardware side.
+    
+
+> **Project status**
+> 
+> This is Part 1 of my Nand2Tetris notes. The focus here is the hardware path. The software/compiler/OS layers should come later as separate posts, because they deserve their own space.
+
 # Chapters
+
+![](https://cdn.hashnode.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/2a9d2a9c-4fa1-4ffc-a133-1fd36c2a3b25.png align="center")
 
 ## 01 Logic Gates
 
@@ -83,34 +100,34 @@ I started off by understanding the different syntax and semantics of this langua
 
 The following is my exact notes as I was working on it
 
-1. The currently selected Register of the RAM is called M.
+1.  The currently selected Register of the RAM is called M.
     
-2. The data register of CPU is named D. Stores a 16bit value
+2.  The data register of CPU is named D. Stores a 16bit value
     
-3. Address register named A. Can work both as Data and Address register.
+3.  Address register named A. Can work both as Data and Address register.
     
 
 **Syntax for the Hack Machine code**
 
-1. @xxx sets A=xxx. But it has some side effects too.
+1.  @xxx sets A=xxx. But it has some side effects too.
     
-    1. M=xxx
+    1.  M=xxx
         
-    2. Selected instruction in the ROM = xxx So, depends on the command that follows it, A can act as either Data or Address register. And even in the Address part, A can either access the Data memory or the instruction memory.
+    2.  Selected instruction in the ROM = xxx So, depends on the command that follows it, A can act as either Data or Address register. And even in the Address part, A can either access the Data memory or the instruction memory.
         
-2. if we want the program flow to jump to a specific location in the Instruction memory, then we set @xxx and then write 0;JMP for unconditional branching;  
+2.  if we want the program flow to jump to a specific location in the Instruction memory, then we set @xxx and then write 0;JMP for unconditional branching;  
     to replicate something like if D==0 goto xxx, you write D;JEQ
     
-3. Variables: These are written as @variable where the name can be anything.  
+3.  Variables: These are written as @variable where the name can be anything.  
     The Hack specification includes 16 inbuilt symbols going from R0 to R15. These are called virtual registers The symbols SCREEN and KBD are special keywords for the screen and keyboard respectively. They have a fixed value in the memory.
     
-4. Label symbols LOOP STOP END  
+4.  Label symbols LOOP STOP END  
     always write them within () like (STOP) or (LOOP)
     
-5. The instruction memory is 0 indexed  
+5.  The instruction memory is 0 indexed  
     When a program is loaded, the nth line of the program is loaded into the address n in the instruction memory
     
-6. Always end a program with an infinite loop or it will move ahead and start executing anything it finds next in the memory.
+6.  Always end a program with an infinite loop or it will move ahead and start executing anything it finds next in the memory.
     
 
 ### Some experiments
@@ -225,15 +242,15 @@ To avoid learning about the specific engineering of each IO device, everything i
 
 **Remember to use the BUILTIN Chips for the ROM32K and RAM16K**
 
-1. 16bit architecture with two memory spaces: data memory and instruction memory. And two specific IO devices, the screen and the keyboard.
+1.  16bit architecture with two memory spaces: data memory and instruction memory. And two specific IO devices, the screen and the keyboard.
     
-2. The CPU consists of the ALU from project 2 and three registers A, D and PC.
+2.  The CPU consists of the ALU from project 2 and three registers A, D and PC.
     
-3. The instruction memory is one of the prebuilt ROM32K
+3.  The instruction memory is one of the prebuilt ROM32K
     
-4. The data memory is one of the prebuilt RAM16K, along with the given Screen and Keyboard memory maps.
+4.  The data memory is one of the prebuilt RAM16K, along with the given Screen and Keyboard memory maps.
     
-5. The Topmost level is the Computer Chip, which is connected to the screen and the keyboard. It also has a reset bit.
+5.  The Topmost level is the Computer Chip, which is connected to the screen and the keyboard. It also has a reset bit.
     
     When reset==0 The stored program executes When reset==1 The execution restarts **TO start execution, set the rest first to 1 and then to 0.**
     
@@ -246,11 +263,11 @@ A two-pass assembler for the Hack assembly language, converting `.asm` files to 
 
 This assembler processes Hack assembly language files and generates binary machine code. It handles three types of instructions:
 
-* **A-instructions**: Address instructions (`@value`)
+*   **A-instructions**: Address instructions (`@value`)
     
-* **C-instructions**: Computation instructions (`dest=comp;jump`)
+*   **C-instructions**: Computation instructions (`dest=comp;jump`)
     
-* **L-instructions**: Label declarations (`(LABEL)`)
+*   **L-instructions**: Label declarations (`(LABEL)`)
     
 
 The assembler uses Python for easier syntax and readability, diverging from the C++ tutorials to avoid blind copying.
@@ -275,19 +292,19 @@ The main entry point that orchestrates the two-pass assembly process:
 
 **Features:**
 
-* **Command-line interface**: Takes `.asm` file as argument
+*   **Command-line interface**: Takes `.asm` file as argument
     
-* **Two-pass algorithm**:
+*   **Two-pass algorithm**:
     
-    * First pass: Builds symbol table from label instructions
+    *   First pass: Builds symbol table from label instructions
         
-    * Second pass: Translates all instructions to binary
+    *   Second pass: Translates all instructions to binary
         
-* **Symbol resolution**: Handles both numeric addresses and symbolic references
+*   **Symbol resolution**: Handles both numeric addresses and symbolic references
     
-* **Output generation**: Creates `.hack` files with 16-bit binary instructions
+*   **Output generation**: Creates `.hack` files with 16-bit binary instructions
     
-* **Error handling**: Validates undefined symbols and instruction formats
+*   **Error handling**: Validates undefined symbols and instruction formats
     
 
 **Usage:** `python` [`HackAssembler.py`](http://HackAssembler.py) `Prog.asm`
@@ -298,26 +315,26 @@ Handles reading and parsing of assembly source files:
 
 **Key Methods:**
 
-* `hasMoreLines()`: Checks for remaining lines to process
+*   `hasMoreLines()`: Checks for remaining lines to process
     
-* `advance()`: Moves to next valid instruction (skips comments and empty lines)
+*   `advance()`: Moves to next valid instruction (skips comments and empty lines)
     
-* `instructionType()`: Identifies instruction type (A, C, or L)
+*   `instructionType()`: Identifies instruction type (A, C, or L)
     
-* `symbol()`: Extracts symbols from A and L instructions
+*   `symbol()`: Extracts symbols from A and L instructions
     
-* `dest()`, `comp()`, `jump()`: Parses components of C-instructions
+*   `dest()`, `comp()`, `jump()`: Parses components of C-instructions
     
 
 **Features:**
 
-* **Comment filtering**: Automatically skips `//` comments and empty lines
+*   **Comment filtering**: Automatically skips `//` comments and empty lines
     
-* **Instruction validation**: Ensures proper syntax for all instruction types
+*   **Instruction validation**: Ensures proper syntax for all instruction types
     
-* **Symbol recognition**: Handles predefined symbols (LOOP, STOP, END)
+*   **Symbol recognition**: Handles predefined symbols (LOOP, STOP, END)
     
-* **Component extraction**: Breaks down C-instructions into dest, comp, and jump parts
+*   **Component extraction**: Breaks down C-instructions into dest, comp, and jump parts
     
 
 ### [Code.py](http://Code.py) - Binary Translation Module
@@ -326,90 +343,90 @@ Translates assembly mnemonics to binary machine code:
 
 **Translation Tables:**
 
-* **DEST\_TABLE**: Maps destination mnemonics to 3-bit codes (M, D, A, MD, AM, AD, AMD)
+*   **DEST\_TABLE**: Maps destination mnemonics to 3-bit codes (M, D, A, MD, AM, AD, AMD)
     
-* **COMP\_TABLE**: Maps computation mnemonics to 7-bit codes (includes both A and M variants)
+*   **COMP\_TABLE**: Maps computation mnemonics to 7-bit codes (includes both A and M variants)
     
-* **JUMP\_TABLE**: Maps jump conditions to 3-bit codes (JGT, JEQ, JGE, JLT, JNE, JLE, JMP)
+*   **JUMP\_TABLE**: Maps jump conditions to 3-bit codes (JGT, JEQ, JGE, JLT, JNE, JLE, JMP)
     
 
 **Key Methods:**
 
-* `dest(mnemonic)`: Returns 3-bit binary code for destination field
+*   `dest(mnemonic)`: Returns 3-bit binary code for destination field
     
-* `comp(mnemonic)`: Returns 7-bit binary code for computation field
+*   `comp(mnemonic)`: Returns 7-bit binary code for computation field
     
-* `jump(mnemonic)`: Returns 3-bit binary code for jump condition
+*   `jump(mnemonic)`: Returns 3-bit binary code for jump condition
     
 
 **Features:**
 
-* **Complete mnemonic coverage**: Supports all Hack assembly mnemonics
+*   **Complete mnemonic coverage**: Supports all Hack assembly mnemonics
     
-* **A/M register handling**: Separate codes for A-register and M-memory operations
+*   **A/M register handling**: Separate codes for A-register and M-memory operations
     
-* **Error validation**: Raises exceptions for invalid mnemonics
+*   **Error validation**: Raises exceptions for invalid mnemonics
     
 
 ### Assembly Process
 
 ### Two-Pass Algorithm
 
-1. **First Pass (Symbol Table Construction)**:
+1.  **First Pass (Symbol Table Construction)**:
     
-    * Scans through all instructions
+    *   Scans through all instructions
         
-    * Records label positions (L-instructions) in symbol table
+    *   Records label positions (L-instructions) in symbol table
         
-    * Maintains ROM address counter for proper label addressing
+    *   Maintains ROM address counter for proper label addressing
         
-2. **Second Pass (Code Generation)**:
+2.  **Second Pass (Code Generation)**:
     
-    * Translates A-instructions to 16-bit binary addresses
+    *   Translates A-instructions to 16-bit binary addresses
         
-    * Converts C-instructions to 16-bit binary (111 + comp + dest + jump)
+    *   Converts C-instructions to 16-bit binary (111 + comp + dest + jump)
         
-    * Resolves symbols using the symbol table from first pass
+    *   Resolves symbols using the symbol table from first pass
         
 
 ### Binary Instruction Format
 
-1. **A-instruction**: `0vvvvvvvvvvvvvvv` (15-bit address/value)
+1.  **A-instruction**: `0vvvvvvvvvvvvvvv` (15-bit address/value)
     
-2. **C-instruction**: `111accccccdddjjj` (3-bit prefix + 7-bit comp + 3-bit dest + 3-bit jump)
+2.  **C-instruction**: `111accccccdddjjj` (3-bit prefix + 7-bit comp + 3-bit dest + 3-bit jump)
     
 
 ### Potential Future Improvements (Not done yet)
 
 #### Enhanced Error Handling
 
-* **Line number reporting**: Show exact location of syntax errors
+*   **Line number reporting**: Show exact location of syntax errors
     
-* **Detailed error messages**: Provide specific guidance for common mistakes
+*   **Detailed error messages**: Provide specific guidance for common mistakes
     
-* **Symbol validation**: Check for undefined or duplicate symbols
+*   **Symbol validation**: Check for undefined or duplicate symbols
     
-* **Instruction validation**: Verify proper mnemonic usage
+*   **Instruction validation**: Verify proper mnemonic usage
     
 
 #### File Management
 
-* **Batch processing**: Handle multiple `.asm` files at once
+*   **Batch processing**: Handle multiple `.asm` files at once
     
-* **Directory operations**: Process entire folders of assembly files
+*   **Directory operations**: Process entire folders of assembly files
     
-* **Output customization**: Allow custom output file names and locations
+*   **Output customization**: Allow custom output file names and locations
     
-* **Backup creation**: Optional backup of existing `.hack` files
+*   **Backup creation**: Optional backup of existing `.hack` files
     
 
 #### Development Features
 
-* **Debug mode**: Verbose output showing symbol table and translation steps
+*   **Debug mode**: Verbose output showing symbol table and translation steps
     
-* **Assembly listing**: Generate annotated output showing original and binary code
+*   **Assembly listing**: Generate annotated output showing original and binary code
     
-* **Performance optimization**: Faster parsing for large assembly files
+*   **Performance optimization**: Faster parsing for large assembly files
     
 
 Also this was the one and only section where i had to take some help from AI to figure out some parts. A goal is to understand it better while working on the future improvements.
