@@ -5,9 +5,24 @@ datePublished: 2026-05-30T04:42:39.018Z
 cuid: cmprv76zm00041sqkejfcbhsr
 slug: what-is-agentic-rag
 cover: https://cdn.hashnode.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/3d5739c8-8228-47fc-98af-94c6a47d8a96.png
-tags: ai, agents, rag, retrieval-augmented-generation, agentic-ai, agentic-rag
+tags: ai, agents, rag, retrieval-augmented-generation, agentic-ai, agentic-rag, mcp
 
 ---
+
+## TL;DR
+
+*   Normal RAG is usually a fixed pipeline: retrieve context, send it to the model, return an answer.
+    
+*   Agentic RAG adds decisions inside the pipeline: when to search, where to search, whether to call tools, and whether the answer is grounded enough.
+    
+*   This is useful when questions are vague, multi-step, tool-dependent, or spread across multiple sources.
+    
+*   The tradeoff is complexity, latency, cost, and harder evaluation.
+    
+
+> **Project status**
+> 
+> My own RAG project is still mostly a controlled local pipeline, but it is starting to need agent-like behavior around query analysis, retrieval strategy, validation, and tool orchestration.
 
 ## Where we are now
 
@@ -133,6 +148,8 @@ In essence it's the following:
 > Instead of hardcoding one retrieve-then-generate path, give the system the ability to plan, choose tools, retrieve iteratively, validate evidence, and then answer.
 
 This has several parts to it as follows:
+
+![](https://cdn.hashnode.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/c7603155-f365-4ee2-86d3-b255a343b907.png align="center")
 
 ### **Query preprocessing**
 
