@@ -4,12 +4,27 @@ datePublished: 2026-06-20T06:02:42.197Z
 cuid: cmqlyb15100010bj9aj83ecp8
 slug: adding-rank-fusion-to-my-rag-retrieval-logic
 cover: https://cdn.hashnode.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/2a9c9773-800e-4387-a2e0-4a8d463a05c4.png
-tags: rag, agentic-ai
+tags: rag, ollama, hybrid-search, agentic-ai, mcp, bm25
 
 ---
 
 In the previous part, we explored **Agentic RAG** as an evolution of the traditional Retrieval-Augmented Generation pipeline:  
 [https://sukalyanroy.hashnode.dev/discovering-rags-2-what-is-agentic-rag](https://sukalyanroy.hashnode.dev/discovering-rags-2-what-is-agentic-rag)
+
+## TL;DR
+
+*   I moved the RAG project from semantic-only retrieval toward hybrid retrieval.
+    
+*   Dense embeddings are still useful for meaning, but BM25 helps with exact terms like MCP, JSON-RPC, stdio, and specific filenames.
+    
+*   Reciprocal Rank Fusion combines both rankings without pretending their raw scores mean the same thing.
+    
+*   This makes retrieval less fragile, but evaluation and reranking are still the next big missing pieces.
+    
+
+> **Project status**
+> 
+> The chatbot now supports hybrid dense + BM25 retrieval with RRF. It can ingest multiple document types, use Ollama locally, expose an MCP server, and return source-attributed answers. The next work is retrieval evaluation, reranking, and more deliberate agentic control.
 
 ## A little Review
 
@@ -126,6 +141,12 @@ There are some tracking and metrics related thing at the top of this function bu
 
 ## Hybrid Search with BM25
 
+| Retrieval style | What it is good at | Where it fails |
+| --- | --- | --- |
+| Dense/vector search | Finds semantically related chunks even when the wording differs | Can miss exact technical terms, filenames, commands, acronyms |
+| BM25 | Rewards exact keyword matches and rare terms | Does not understand meaning beyond lexical overlap |
+| Hybrid + RRF | Combines semantic and lexical ranking without mixing incompatible raw scores | Needs tuning and evaluation to know whether it actually improves answers |
+
 If you've been following the previous posts, you know that the first thing i started with, was vector embedding and cosine similarity.
 
 Related to vector spaces? Check. Using embedding models that are LLM based? Check!
@@ -229,9 +250,13 @@ def reciprocal_rank_fusion(
 
 The code snippet and docstring are lifted straight from my repo, and are mostly self explanatory. Though we can always experiment with the `rrf_k` damping factor to see if we can squeeze out better results.
 
+![](https://cdn.hashnode.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/3a9d8c6d-549a-4bed-b6b7-12e9273afdda.png align="center")
+
 ## Conclusion
 
 So this update marks an important shift in the project: retrieval is no longer purely semantic. By adding BM25 and RRF, the chatbot can now combine meaning-based search with exact lexical matching. The next step is to improve what happens after retrieval: reranking, evaluation, and eventually more agentic control over the pipeline.
+
+If you are building a small RAG system yourself, try one query that depends on meaning and one query that depends on exact terms. That contrast will tell you faster than any theory whether hybrid retrieval is worth adding.
 
 ## References
 
