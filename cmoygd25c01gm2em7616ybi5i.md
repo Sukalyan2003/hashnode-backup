@@ -4,7 +4,7 @@ datePublished: 2026-05-09T14:41:59.331Z
 cuid: cmoygd25c01gm2em7616ybi5i
 slug: transforming-chatbot-interactions-with-retrieval-augmented-generation
 cover: https://cloudmate-test.s3.us-east-1.amazonaws.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/fa2d15e1-ed82-4806-a585-518539617be1.webp
-tags: rag
+tags: chatbot, llm, embeddings, rag, retrieval-augmented-generation
 
 ---
 
@@ -18,7 +18,26 @@ So first of all, in this part, we will deal with, what is a RAG all about? The h
 
 (And if you need further background on LLMs, check out this post [here](https://sukalyanroy.hashnode.dev/what-even-are-llms))
 
+## TL;DR
+
+*   RAG gives a chatbot external context instead of relying only on model memory.
+    
+*   The basic loop is: collect documents, chunk them, embed them, retrieve relevant chunks, and pass them to the LLM.
+    
+*   This helps with private notes, project docs, PDFs, and changing information.
+    
+*   Retrieval quality matters as much as generation quality.
+    
+*   Later posts in this series improve this baseline with agentic RAG and hybrid BM25 retrieval.
+    
+
+> **Project status**
+> 
+> This post is the conceptual starting point for my local RAG project. At this stage, the important idea is the pipeline itself. Later updates add MCP support, hybrid retrieval, and more control over query handling.
+
 ## What is a RAG?
+
+![](https://cdn.hashnode.com/uploads/covers/659a9af9ff6cf3c9cf4a9499/fdefc325-70b7-4beb-adbb-447e54dfdd2b.png align="center")
 
 Suppose you want to develop a chatbot or assistant, that deals with proprietary or highly specific data that is new, and certainly not within the web crawled general data the model has been trained on.
 
