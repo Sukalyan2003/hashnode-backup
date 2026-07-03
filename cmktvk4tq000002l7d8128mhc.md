@@ -6,7 +6,7 @@ datePublished: 2026-01-25T15:09:43.406Z
 cuid: cmktvk4tq000002l7d8128mhc
 slug: using-vibecoding-to-learn
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1769238585826/cd88b702-d915-48f1-8868-4831d7aa4f89.jpeg
-tags: ai, vibe-coding
+tags: ai, developer-tools, llm, ai-agents, vibe-coding
 
 ---
 
@@ -18,6 +18,21 @@ To begin with, [this clip](https://youtu.be/m0b_D2JgZgY?si=92U9yprohs0Bew2k) alt
 
 Vibecoding (for me) = letting an LLM generate working code faster than I can fully reason about it.  
 It’s not going away, so this post is about using it safely: as a hint engine, a prototyping tool, and a learning accelerator—without outsourcing your judgment.
+
+## TL;DR
+
+*   Vibecoding can be useful for learning if you treat the AI as a fast collaborator, not a replacement for understanding.
+    
+*   The danger is shipping code you cannot explain.
+    
+*   The useful version is asking for small steps, reading the diff, running it, and rewriting parts yourself.
+    
+*   If the model hides the hard part from you, it did not help you learn.
+    
+
+> **Learning status**
+> 
+> This is my current stance on AI-assisted learning. I am not against using the tools. I am against outsourcing the exact struggle that teaches the concept.
 
 # What can we do?
 
@@ -101,17 +116,17 @@ Return: The set of engaged pairs (this is a stable matching)
 
 But here, there are several real world constraints that we might want to consider:
 
-1. Each Recipient can accept more than one proposers. (Like in College admissions)
+1.  Each Recipient can accept more than one proposers. (Like in College admissions)
     
-2. The proposers do not have a complete preference list.
+2.  The proposers do not have a complete preference list.
     
-3. When there is a Tie in preferences
+3.  When there is a Tie in preferences
     
-4. If one party lies. It is usually not optimal for the proposer to lie, but the receivers can benefit from lying.
+4.  If one party lies. It is usually not optimal for the proposer to lie, but the receivers can benefit from lying.
     
-5. Deferred Vs Immediate acceptance
+5.  Deferred Vs Immediate acceptance
     
-6. and many more
+6.  and many more
     
 
 So how do we deal with these modern considerations? What the AI did, was use knowledge from later papers to add changes to it.
@@ -368,12 +383,19 @@ These show a few different ways i have used AI to generate code, each taking a d
 
 A checklist for making good use of it would be:
 
-* Use AI for: scaffolding, API exploration, test generation, quick prototypes, visualizations.
+*   Use AI for: scaffolding, API exploration, test generation, quick prototypes, visualizations.
     
-* Don’t use AI for: security-sensitive code, unclear requirements, anything you can’t explain back.
+*   Don’t use AI for: security-sensitive code, unclear requirements, anything you can’t explain back.
     
-* Always do: run tests, add logging, read diffs, ask “what would break?”, add constraints to prompts.
+*   Always do: run tests, add logging, read diffs, ask “what would break?”, add constraints to prompts.
     
+
+| Bad use | Better use |
+| --- | --- |
+| "Build the whole app for me" | "Help me implement this one function, then explain the tradeoffs" |
+| Accepting code because it runs once | Reading the diff and testing edge cases |
+| Asking broad vague prompts | Giving the current file, error, and goal |
+| Skipping concepts | Asking for the concept, then coding it yourself |
 
 I’d say that AI is pretty useful, and almost an inseparable part of our lives, but it is essential that we teach ourselves enough to be able to discern when it is giving us nonsense.
 
